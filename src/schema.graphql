@@ -1,0 +1,116 @@
+type Query {
+  post(id: ID!): Post
+  meme(id: ID!): Meme
+  thread(id: ID!): Thread
+  me: User
+}
+
+type Mutation {
+  signup(email: String!, password: String!, name: String!): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+  
+  createMeme(
+    title: String!
+    thumbnail: String!
+    memeitems: [MemeItemInput!]!
+  )
+
+  meme(
+    id: ID
+    title: String!
+    thumbnail: String!
+    memeitems: [MemeItemInput!]!
+  ): Meme!
+
+  thread(
+    id: ID,
+    title: String!,
+    posts: [PostInput!]!
+  ): Thread!
+
+  post (
+    id: ID!
+    title: String!
+    meme: MemeInput!
+    thread: ThreadInput!
+  ): Post!
+
+  user(
+    id: ID!
+    name: String!
+    email: String!
+    displayImage: MemeItemInput
+    posts: [PostInput!]
+  ): User!
+}
+
+# type Subscription {
+#   feedSubscription: Post
+# }
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  displayImage: MemeItem
+  posts: [Post!]
+}
+
+input ThreadInput {
+  id: ID!
+  title: String!
+  posts: [PostInput!]!
+}
+
+type Thread {
+  id: ID!
+  title: String!
+  posts: [Post!]!
+}
+
+input PostInput {
+  id: ID!
+  title: String!
+  meme: MemeInput!
+  thread: ThreadInput!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  meme: Meme!
+  author: User!
+  thread: Thread!
+}
+
+input MemeInput {
+  id: ID!
+  title: String!
+  thumbnail: String!
+  memeItems: [MemeItemInput!]!
+}
+
+type Meme {
+  id: ID!
+  title: String!
+  thumbnail: String!
+  memeItems: [MemeItem!]!
+  author: User!
+}
+
+input MemeItemInput {
+  id: ID!
+  value: String!
+  config: String
+}
+
+type MemeItem {
+  id: ID!
+  value: String!
+  config: String
+}
