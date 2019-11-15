@@ -1,41 +1,48 @@
 type Query {
+  me: User
+  thread(id: ID!): Thread
   post(id: ID!): Post
   meme(id: ID!): Meme
-  thread(id: ID!): Thread
-  me: User
 }
 
 type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
 
+  user(
+    id: ID!
+    blocked: Boolean!
+    email: String!
+    displayName: String!
+    passwordHash: String!
+    confirmed: Boolean!
+    permissions: [PermissionType]
+    threads: [Thread]
+  ): User!
+
   meme(
-    id: ID
-    title: String!
-    thumbnail: String!
-    memeitems: [MemeItemInput!]!
+    id: ID! @unique
+    blocked: Boolean!
+    author: User!
+    memeItems: [MemeItem]!
+    tags: [Tag]
   ): Meme!
 
   thread(
-    id: ID,
-    title: String!,
-    posts: [PostInput!]!
+    id: ID!
+    blocked: Boolean!
+    posts: [Post]
+    tags: [Tag]
   ): Thread!
 
   post (
-    id: ID!
-    title: String!
-    meme: MemeInput!
-    thread: ThreadInput!
-  ): Post!
-
-  user(
-    id: ID!
+    id: ID! @unique
+    blocked: Boolean!
     name: String!
-    email: String!
-    displayImage: MemeItemInput
-    posts: [PostInput!]
-  ): User!
+    meme: Meme!
+    author: User!
+    tags: [Tag]
+  ): Post!
 }
 
 # type Subscription {
@@ -47,13 +54,27 @@ type AuthPayload {
   user: User!
 }
 
+# ============================
+
 type User {
-  id: ID!
-  name: String!
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean!
   email: String!
-  displayImage: MemeItem
-  posts: [Post!]
+  displayName: String!
+  passwordHash: String!
+  confirmed: Boolean!
+  permissions: [PermissionType]
+  threads: [Thread]
 }
+
+enum PermissionType {
+  USER
+  ADMIN
+}
+
+# ============================
 
 input ThreadInput {
   id: ID!
@@ -63,9 +84,14 @@ input ThreadInput {
 
 type Thread {
   id: ID!
-  title: String!
-  posts: [Post!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean!
+  posts: [Post]
+  tags: [Tag]
 }
+
+# ============================
 
 input PostInput {
   id: ID!
@@ -75,12 +101,17 @@ input PostInput {
 }
 
 type Post {
-  id: ID!
-  title: String!
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean!
+  name: String!
   meme: Meme!
   author: User!
-  thread: Thread!
+  tags: [Tag]
 }
+
+# ============================
 
 input MemeInput {
   id: ID!
@@ -90,12 +121,16 @@ input MemeInput {
 }
 
 type Meme {
-  id: ID!
-  title: String!
-  thumbnail: String!
-  memeItems: [MemeItem!]!
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean!
   author: User!
+  memeItems: [MemeItem]!
+  tags: [Tag]
 }
+
+# ============================
 
 input MemeItemInput {
   id: ID!
@@ -104,7 +139,19 @@ input MemeItemInput {
 }
 
 type MemeItem {
-  id: ID!
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean!
+  type: MemeItemType!
+  meta: String!
   value: String!
-  config: String
+  style: String!
+  tags: [Tag]
+}
+
+enum MemeItemType {
+  CANVAS,
+  IMAGE,
+  TEXT
 }

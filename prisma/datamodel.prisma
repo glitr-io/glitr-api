@@ -4,6 +4,7 @@ type User {
   updatedAt: DateTime!
   blocked: Boolean! @default(value: "false")
   email: String! @unique
+  displayName: String!
   passwordHash: String!
   confirmed: Boolean! @default(value: "false")
   permissions: [PermissionType]
