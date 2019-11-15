@@ -16,7 +16,11 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  meme: (where?: MemeWhereInput) => Promise<boolean>;
+  memeItem: (where?: MemeItemWhereInput) => Promise<boolean>;
   post: (where?: PostWhereInput) => Promise<boolean>;
+  tag: (where?: TagWhereInput) => Promise<boolean>;
+  thread: (where?: ThreadWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -39,6 +43,44 @@ export interface Prisma {
    * Queries
    */
 
+  meme: (where: MemeWhereUniqueInput) => MemeNullablePromise;
+  memes: (args?: {
+    where?: MemeWhereInput;
+    orderBy?: MemeOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Meme>;
+  memesConnection: (args?: {
+    where?: MemeWhereInput;
+    orderBy?: MemeOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => MemeConnectionPromise;
+  memeItem: (where: MemeItemWhereUniqueInput) => MemeItemNullablePromise;
+  memeItems: (args?: {
+    where?: MemeItemWhereInput;
+    orderBy?: MemeItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<MemeItem>;
+  memeItemsConnection: (args?: {
+    where?: MemeItemWhereInput;
+    orderBy?: MemeItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => MemeItemConnectionPromise;
   post: (where: PostWhereUniqueInput) => PostNullablePromise;
   posts: (args?: {
     where?: PostWhereInput;
@@ -58,6 +100,44 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => PostConnectionPromise;
+  tag: (where: TagWhereUniqueInput) => TagNullablePromise;
+  tags: (args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Tag>;
+  tagsConnection: (args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => TagConnectionPromise;
+  thread: (where: ThreadWhereUniqueInput) => ThreadNullablePromise;
+  threads: (args?: {
+    where?: ThreadWhereInput;
+    orderBy?: ThreadOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Thread>;
+  threadsConnection: (args?: {
+    where?: ThreadWhereInput;
+    orderBy?: ThreadOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ThreadConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -83,6 +163,38 @@ export interface Prisma {
    * Mutations
    */
 
+  createMeme: (data: MemeCreateInput) => MemePromise;
+  updateMeme: (args: {
+    data: MemeUpdateInput;
+    where: MemeWhereUniqueInput;
+  }) => MemePromise;
+  updateManyMemes: (args: {
+    data: MemeUpdateManyMutationInput;
+    where?: MemeWhereInput;
+  }) => BatchPayloadPromise;
+  upsertMeme: (args: {
+    where: MemeWhereUniqueInput;
+    create: MemeCreateInput;
+    update: MemeUpdateInput;
+  }) => MemePromise;
+  deleteMeme: (where: MemeWhereUniqueInput) => MemePromise;
+  deleteManyMemes: (where?: MemeWhereInput) => BatchPayloadPromise;
+  createMemeItem: (data: MemeItemCreateInput) => MemeItemPromise;
+  updateMemeItem: (args: {
+    data: MemeItemUpdateInput;
+    where: MemeItemWhereUniqueInput;
+  }) => MemeItemPromise;
+  updateManyMemeItems: (args: {
+    data: MemeItemUpdateManyMutationInput;
+    where?: MemeItemWhereInput;
+  }) => BatchPayloadPromise;
+  upsertMemeItem: (args: {
+    where: MemeItemWhereUniqueInput;
+    create: MemeItemCreateInput;
+    update: MemeItemUpdateInput;
+  }) => MemeItemPromise;
+  deleteMemeItem: (where: MemeItemWhereUniqueInput) => MemeItemPromise;
+  deleteManyMemeItems: (where?: MemeItemWhereInput) => BatchPayloadPromise;
   createPost: (data: PostCreateInput) => PostPromise;
   updatePost: (args: {
     data: PostUpdateInput;
@@ -99,6 +211,38 @@ export interface Prisma {
   }) => PostPromise;
   deletePost: (where: PostWhereUniqueInput) => PostPromise;
   deleteManyPosts: (where?: PostWhereInput) => BatchPayloadPromise;
+  createTag: (data: TagCreateInput) => TagPromise;
+  updateTag: (args: {
+    data: TagUpdateInput;
+    where: TagWhereUniqueInput;
+  }) => TagPromise;
+  updateManyTags: (args: {
+    data: TagUpdateManyMutationInput;
+    where?: TagWhereInput;
+  }) => BatchPayloadPromise;
+  upsertTag: (args: {
+    where: TagWhereUniqueInput;
+    create: TagCreateInput;
+    update: TagUpdateInput;
+  }) => TagPromise;
+  deleteTag: (where: TagWhereUniqueInput) => TagPromise;
+  deleteManyTags: (where?: TagWhereInput) => BatchPayloadPromise;
+  createThread: (data: ThreadCreateInput) => ThreadPromise;
+  updateThread: (args: {
+    data: ThreadUpdateInput;
+    where: ThreadWhereUniqueInput;
+  }) => ThreadPromise;
+  updateManyThreads: (args: {
+    data: ThreadUpdateManyMutationInput;
+    where?: ThreadWhereInput;
+  }) => BatchPayloadPromise;
+  upsertThread: (args: {
+    where: ThreadWhereUniqueInput;
+    create: ThreadCreateInput;
+    update: ThreadUpdateInput;
+  }) => ThreadPromise;
+  deleteThread: (where: ThreadWhereUniqueInput) => ThreadPromise;
+  deleteManyThreads: (where?: ThreadWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -124,9 +268,21 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  meme: (
+    where?: MemeSubscriptionWhereInput
+  ) => MemeSubscriptionPayloadSubscription;
+  memeItem: (
+    where?: MemeItemSubscriptionWhereInput
+  ) => MemeItemSubscriptionPayloadSubscription;
   post: (
     where?: PostSubscriptionWhereInput
   ) => PostSubscriptionPayloadSubscription;
+  tag: (
+    where?: TagSubscriptionWhereInput
+  ) => TagSubscriptionPayloadSubscription;
+  thread: (
+    where?: ThreadSubscriptionWhereInput
+  ) => ThreadSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -140,6 +296,20 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type PermissionType = "USER" | "ADMIN";
+
+export type MemeItemType = "CANVAS" | "IMAGE" | "TEXT";
+
+export type ThreadOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "blocked_ASC"
+  | "blocked_DESC";
+
 export type PostOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -147,28 +317,116 @@ export type PostOrderByInput =
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC"
-  | "published_ASC"
-  | "published_DESC"
-  | "title_ASC"
-  | "title_DESC"
-  | "content_ASC"
-  | "content_DESC";
+  | "blocked_ASC"
+  | "blocked_DESC"
+  | "name_ASC"
+  | "name_DESC";
+
+export type TagOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "blocked_ASC"
+  | "blocked_DESC"
+  | "name_ASC"
+  | "name_DESC";
+
+export type MemeItemOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "blocked_ASC"
+  | "blocked_DESC"
+  | "type_ASC"
+  | "type_DESC"
+  | "meta_ASC"
+  | "meta_DESC"
+  | "value_ASC"
+  | "value_DESC"
+  | "style_ASC"
+  | "style_DESC";
+
+export type MemeOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "blocked_ASC"
+  | "blocked_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "blocked_ASC"
+  | "blocked_DESC"
   | "email_ASC"
   | "email_DESC"
-  | "password_ASC"
-  | "password_DESC"
-  | "name_ASC"
-  | "name_DESC";
+  | "passwordHash_ASC"
+  | "passwordHash_DESC"
+  | "confirmed_ASC"
+  | "confirmed_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type PostWhereUniqueInput = AtLeastOne<{
+export type MemeWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
+
+export interface ThreadWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  blocked?: Maybe<Boolean>;
+  blocked_not?: Maybe<Boolean>;
+  posts_every?: Maybe<PostWhereInput>;
+  posts_some?: Maybe<PostWhereInput>;
+  posts_none?: Maybe<PostWhereInput>;
+  tags_every?: Maybe<TagWhereInput>;
+  tags_some?: Maybe<TagWhereInput>;
+  tags_none?: Maybe<TagWhereInput>;
+  AND?: Maybe<ThreadWhereInput[] | ThreadWhereInput>;
+  OR?: Maybe<ThreadWhereInput[] | ThreadWhereInput>;
+  NOT?: Maybe<ThreadWhereInput[] | ThreadWhereInput>;
+}
 
 export interface PostWhereInput {
   id?: Maybe<ID_Input>;
@@ -201,40 +459,75 @@ export interface PostWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  published?: Maybe<Boolean>;
-  published_not?: Maybe<Boolean>;
-  title?: Maybe<String>;
-  title_not?: Maybe<String>;
-  title_in?: Maybe<String[] | String>;
-  title_not_in?: Maybe<String[] | String>;
-  title_lt?: Maybe<String>;
-  title_lte?: Maybe<String>;
-  title_gt?: Maybe<String>;
-  title_gte?: Maybe<String>;
-  title_contains?: Maybe<String>;
-  title_not_contains?: Maybe<String>;
-  title_starts_with?: Maybe<String>;
-  title_not_starts_with?: Maybe<String>;
-  title_ends_with?: Maybe<String>;
-  title_not_ends_with?: Maybe<String>;
-  content?: Maybe<String>;
-  content_not?: Maybe<String>;
-  content_in?: Maybe<String[] | String>;
-  content_not_in?: Maybe<String[] | String>;
-  content_lt?: Maybe<String>;
-  content_lte?: Maybe<String>;
-  content_gt?: Maybe<String>;
-  content_gte?: Maybe<String>;
-  content_contains?: Maybe<String>;
-  content_not_contains?: Maybe<String>;
-  content_starts_with?: Maybe<String>;
-  content_not_starts_with?: Maybe<String>;
-  content_ends_with?: Maybe<String>;
-  content_not_ends_with?: Maybe<String>;
+  blocked?: Maybe<Boolean>;
+  blocked_not?: Maybe<Boolean>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  meme?: Maybe<MemeWhereInput>;
   author?: Maybe<UserWhereInput>;
+  tags_every?: Maybe<TagWhereInput>;
+  tags_some?: Maybe<TagWhereInput>;
+  tags_none?: Maybe<TagWhereInput>;
   AND?: Maybe<PostWhereInput[] | PostWhereInput>;
   OR?: Maybe<PostWhereInput[] | PostWhereInput>;
   NOT?: Maybe<PostWhereInput[] | PostWhereInput>;
+}
+
+export interface MemeWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  blocked?: Maybe<Boolean>;
+  blocked_not?: Maybe<Boolean>;
+  author?: Maybe<UserWhereInput>;
+  memeItems_every?: Maybe<MemeItemWhereInput>;
+  memeItems_some?: Maybe<MemeItemWhereInput>;
+  memeItems_none?: Maybe<MemeItemWhereInput>;
+  tags_every?: Maybe<TagWhereInput>;
+  tags_some?: Maybe<TagWhereInput>;
+  tags_none?: Maybe<TagWhereInput>;
+  AND?: Maybe<MemeWhereInput[] | MemeWhereInput>;
+  OR?: Maybe<MemeWhereInput[] | MemeWhereInput>;
+  NOT?: Maybe<MemeWhereInput[] | MemeWhereInput>;
 }
 
 export interface UserWhereInput {
@@ -252,6 +545,24 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  blocked?: Maybe<Boolean>;
+  blocked_not?: Maybe<Boolean>;
   email?: Maybe<String>;
   email_not?: Maybe<String>;
   email_in?: Maybe<String[] | String>;
@@ -266,20 +577,150 @@ export interface UserWhereInput {
   email_not_starts_with?: Maybe<String>;
   email_ends_with?: Maybe<String>;
   email_not_ends_with?: Maybe<String>;
-  password?: Maybe<String>;
-  password_not?: Maybe<String>;
-  password_in?: Maybe<String[] | String>;
-  password_not_in?: Maybe<String[] | String>;
-  password_lt?: Maybe<String>;
-  password_lte?: Maybe<String>;
-  password_gt?: Maybe<String>;
-  password_gte?: Maybe<String>;
-  password_contains?: Maybe<String>;
-  password_not_contains?: Maybe<String>;
-  password_starts_with?: Maybe<String>;
-  password_not_starts_with?: Maybe<String>;
-  password_ends_with?: Maybe<String>;
-  password_not_ends_with?: Maybe<String>;
+  passwordHash?: Maybe<String>;
+  passwordHash_not?: Maybe<String>;
+  passwordHash_in?: Maybe<String[] | String>;
+  passwordHash_not_in?: Maybe<String[] | String>;
+  passwordHash_lt?: Maybe<String>;
+  passwordHash_lte?: Maybe<String>;
+  passwordHash_gt?: Maybe<String>;
+  passwordHash_gte?: Maybe<String>;
+  passwordHash_contains?: Maybe<String>;
+  passwordHash_not_contains?: Maybe<String>;
+  passwordHash_starts_with?: Maybe<String>;
+  passwordHash_not_starts_with?: Maybe<String>;
+  passwordHash_ends_with?: Maybe<String>;
+  passwordHash_not_ends_with?: Maybe<String>;
+  confirmed?: Maybe<Boolean>;
+  confirmed_not?: Maybe<Boolean>;
+  threads_every?: Maybe<ThreadWhereInput>;
+  threads_some?: Maybe<ThreadWhereInput>;
+  threads_none?: Maybe<ThreadWhereInput>;
+  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
+  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
+  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
+}
+
+export interface MemeItemWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  blocked?: Maybe<Boolean>;
+  blocked_not?: Maybe<Boolean>;
+  type?: Maybe<MemeItemType>;
+  type_not?: Maybe<MemeItemType>;
+  type_in?: Maybe<MemeItemType[] | MemeItemType>;
+  type_not_in?: Maybe<MemeItemType[] | MemeItemType>;
+  meta?: Maybe<String>;
+  meta_not?: Maybe<String>;
+  meta_in?: Maybe<String[] | String>;
+  meta_not_in?: Maybe<String[] | String>;
+  meta_lt?: Maybe<String>;
+  meta_lte?: Maybe<String>;
+  meta_gt?: Maybe<String>;
+  meta_gte?: Maybe<String>;
+  meta_contains?: Maybe<String>;
+  meta_not_contains?: Maybe<String>;
+  meta_starts_with?: Maybe<String>;
+  meta_not_starts_with?: Maybe<String>;
+  meta_ends_with?: Maybe<String>;
+  meta_not_ends_with?: Maybe<String>;
+  value?: Maybe<String>;
+  value_not?: Maybe<String>;
+  value_in?: Maybe<String[] | String>;
+  value_not_in?: Maybe<String[] | String>;
+  value_lt?: Maybe<String>;
+  value_lte?: Maybe<String>;
+  value_gt?: Maybe<String>;
+  value_gte?: Maybe<String>;
+  value_contains?: Maybe<String>;
+  value_not_contains?: Maybe<String>;
+  value_starts_with?: Maybe<String>;
+  value_not_starts_with?: Maybe<String>;
+  value_ends_with?: Maybe<String>;
+  value_not_ends_with?: Maybe<String>;
+  style?: Maybe<String>;
+  style_not?: Maybe<String>;
+  style_in?: Maybe<String[] | String>;
+  style_not_in?: Maybe<String[] | String>;
+  style_lt?: Maybe<String>;
+  style_lte?: Maybe<String>;
+  style_gt?: Maybe<String>;
+  style_gte?: Maybe<String>;
+  style_contains?: Maybe<String>;
+  style_not_contains?: Maybe<String>;
+  style_starts_with?: Maybe<String>;
+  style_not_starts_with?: Maybe<String>;
+  style_ends_with?: Maybe<String>;
+  style_not_ends_with?: Maybe<String>;
+  tags_every?: Maybe<TagWhereInput>;
+  tags_some?: Maybe<TagWhereInput>;
+  tags_none?: Maybe<TagWhereInput>;
+  AND?: Maybe<MemeItemWhereInput[] | MemeItemWhereInput>;
+  OR?: Maybe<MemeItemWhereInput[] | MemeItemWhereInput>;
+  NOT?: Maybe<MemeItemWhereInput[] | MemeItemWhereInput>;
+}
+
+export interface TagWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  blocked?: Maybe<Boolean>;
+  blocked_not?: Maybe<Boolean>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
   name_in?: Maybe<String[] | String>;
@@ -294,132 +735,459 @@ export interface UserWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
-  posts_every?: Maybe<PostWhereInput>;
-  posts_some?: Maybe<PostWhereInput>;
-  posts_none?: Maybe<PostWhereInput>;
-  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
-  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
-  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
+  AND?: Maybe<TagWhereInput[] | TagWhereInput>;
+  OR?: Maybe<TagWhereInput[] | TagWhereInput>;
+  NOT?: Maybe<TagWhereInput[] | TagWhereInput>;
 }
+
+export type MemeItemWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type PostWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type TagWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type ThreadWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   email?: Maybe<String>;
 }>;
 
-export interface PostCreateInput {
-  id?: Maybe<ID_Input>;
-  published?: Maybe<Boolean>;
-  title: String;
-  content: String;
-  author: UserCreateOneWithoutPostsInput;
+export interface MemeCreateInput {
+  blocked?: Maybe<Boolean>;
+  author: UserCreateOneInput;
+  memeItems?: Maybe<MemeItemCreateManyInput>;
+  tags?: Maybe<TagCreateManyInput>;
 }
 
-export interface UserCreateOneWithoutPostsInput {
-  create?: Maybe<UserCreateWithoutPostsInput>;
+export interface UserCreateOneInput {
+  create?: Maybe<UserCreateInput>;
   connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserCreateWithoutPostsInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  password: String;
-  name: String;
-}
-
-export interface PostUpdateInput {
-  published?: Maybe<Boolean>;
-  title?: Maybe<String>;
-  content?: Maybe<String>;
-  author?: Maybe<UserUpdateOneRequiredWithoutPostsInput>;
-}
-
-export interface UserUpdateOneRequiredWithoutPostsInput {
-  create?: Maybe<UserCreateWithoutPostsInput>;
-  update?: Maybe<UserUpdateWithoutPostsDataInput>;
-  upsert?: Maybe<UserUpsertWithoutPostsInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateWithoutPostsDataInput {
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  name?: Maybe<String>;
-}
-
-export interface UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput;
-  create: UserCreateWithoutPostsInput;
-}
-
-export interface PostUpdateManyMutationInput {
-  published?: Maybe<Boolean>;
-  title?: Maybe<String>;
-  content?: Maybe<String>;
 }
 
 export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
+  blocked?: Maybe<Boolean>;
   email: String;
-  password: String;
-  name: String;
-  posts?: Maybe<PostCreateManyWithoutAuthorInput>;
+  passwordHash: String;
+  confirmed?: Maybe<Boolean>;
+  permissions?: Maybe<UserCreatepermissionsInput>;
+  threads?: Maybe<ThreadCreateManyInput>;
 }
 
-export interface PostCreateManyWithoutAuthorInput {
-  create?: Maybe<PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput>;
+export interface UserCreatepermissionsInput {
+  set?: Maybe<PermissionType[] | PermissionType>;
+}
+
+export interface ThreadCreateManyInput {
+  create?: Maybe<ThreadCreateInput[] | ThreadCreateInput>;
+  connect?: Maybe<ThreadWhereUniqueInput[] | ThreadWhereUniqueInput>;
+}
+
+export interface ThreadCreateInput {
+  blocked?: Maybe<Boolean>;
+  posts?: Maybe<PostCreateManyInput>;
+  tags?: Maybe<TagCreateManyInput>;
+}
+
+export interface PostCreateManyInput {
+  create?: Maybe<PostCreateInput[] | PostCreateInput>;
   connect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
 }
 
-export interface PostCreateWithoutAuthorInput {
-  id?: Maybe<ID_Input>;
-  published?: Maybe<Boolean>;
-  title: String;
-  content: String;
+export interface PostCreateInput {
+  blocked?: Maybe<Boolean>;
+  name: String;
+  meme: MemeCreateOneInput;
+  author: UserCreateOneInput;
+  tags?: Maybe<TagCreateManyInput>;
 }
 
-export interface UserUpdateInput {
+export interface MemeCreateOneInput {
+  create?: Maybe<MemeCreateInput>;
+  connect?: Maybe<MemeWhereUniqueInput>;
+}
+
+export interface TagCreateManyInput {
+  create?: Maybe<TagCreateInput[] | TagCreateInput>;
+  connect?: Maybe<TagWhereUniqueInput[] | TagWhereUniqueInput>;
+}
+
+export interface TagCreateInput {
+  blocked?: Maybe<Boolean>;
+  name: String;
+}
+
+export interface MemeItemCreateManyInput {
+  create?: Maybe<MemeItemCreateInput[] | MemeItemCreateInput>;
+  connect?: Maybe<MemeItemWhereUniqueInput[] | MemeItemWhereUniqueInput>;
+}
+
+export interface MemeItemCreateInput {
+  blocked?: Maybe<Boolean>;
+  type: MemeItemType;
+  meta: String;
+  value: String;
+  style: String;
+  tags?: Maybe<TagCreateManyInput>;
+}
+
+export interface MemeUpdateInput {
+  blocked?: Maybe<Boolean>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  memeItems?: Maybe<MemeItemUpdateManyInput>;
+  tags?: Maybe<TagUpdateManyInput>;
+}
+
+export interface UserUpdateOneRequiredInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateDataInput {
+  blocked?: Maybe<Boolean>;
   email?: Maybe<String>;
-  password?: Maybe<String>;
-  name?: Maybe<String>;
-  posts?: Maybe<PostUpdateManyWithoutAuthorInput>;
+  passwordHash?: Maybe<String>;
+  confirmed?: Maybe<Boolean>;
+  permissions?: Maybe<UserUpdatepermissionsInput>;
+  threads?: Maybe<ThreadUpdateManyInput>;
 }
 
-export interface PostUpdateManyWithoutAuthorInput {
-  create?: Maybe<PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput>;
+export interface UserUpdatepermissionsInput {
+  set?: Maybe<PermissionType[] | PermissionType>;
+}
+
+export interface ThreadUpdateManyInput {
+  create?: Maybe<ThreadCreateInput[] | ThreadCreateInput>;
+  update?: Maybe<
+    | ThreadUpdateWithWhereUniqueNestedInput[]
+    | ThreadUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | ThreadUpsertWithWhereUniqueNestedInput[]
+    | ThreadUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<ThreadWhereUniqueInput[] | ThreadWhereUniqueInput>;
+  connect?: Maybe<ThreadWhereUniqueInput[] | ThreadWhereUniqueInput>;
+  set?: Maybe<ThreadWhereUniqueInput[] | ThreadWhereUniqueInput>;
+  disconnect?: Maybe<ThreadWhereUniqueInput[] | ThreadWhereUniqueInput>;
+  deleteMany?: Maybe<ThreadScalarWhereInput[] | ThreadScalarWhereInput>;
+  updateMany?: Maybe<
+    | ThreadUpdateManyWithWhereNestedInput[]
+    | ThreadUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ThreadUpdateWithWhereUniqueNestedInput {
+  where: ThreadWhereUniqueInput;
+  data: ThreadUpdateDataInput;
+}
+
+export interface ThreadUpdateDataInput {
+  blocked?: Maybe<Boolean>;
+  posts?: Maybe<PostUpdateManyInput>;
+  tags?: Maybe<TagUpdateManyInput>;
+}
+
+export interface PostUpdateManyInput {
+  create?: Maybe<PostCreateInput[] | PostCreateInput>;
+  update?: Maybe<
+    | PostUpdateWithWhereUniqueNestedInput[]
+    | PostUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | PostUpsertWithWhereUniqueNestedInput[]
+    | PostUpsertWithWhereUniqueNestedInput
+  >;
   delete?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
   connect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
   set?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
   disconnect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
-  update?: Maybe<
-    | PostUpdateWithWhereUniqueWithoutAuthorInput[]
-    | PostUpdateWithWhereUniqueWithoutAuthorInput
-  >;
-  upsert?: Maybe<
-    | PostUpsertWithWhereUniqueWithoutAuthorInput[]
-    | PostUpsertWithWhereUniqueWithoutAuthorInput
-  >;
   deleteMany?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
   updateMany?: Maybe<
     PostUpdateManyWithWhereNestedInput[] | PostUpdateManyWithWhereNestedInput
   >;
 }
 
-export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
+export interface PostUpdateWithWhereUniqueNestedInput {
   where: PostWhereUniqueInput;
-  data: PostUpdateWithoutAuthorDataInput;
+  data: PostUpdateDataInput;
 }
 
-export interface PostUpdateWithoutAuthorDataInput {
-  published?: Maybe<Boolean>;
-  title?: Maybe<String>;
-  content?: Maybe<String>;
+export interface PostUpdateDataInput {
+  blocked?: Maybe<Boolean>;
+  name?: Maybe<String>;
+  meme?: Maybe<MemeUpdateOneRequiredInput>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  tags?: Maybe<TagUpdateManyInput>;
 }
 
-export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
+export interface MemeUpdateOneRequiredInput {
+  create?: Maybe<MemeCreateInput>;
+  update?: Maybe<MemeUpdateDataInput>;
+  upsert?: Maybe<MemeUpsertNestedInput>;
+  connect?: Maybe<MemeWhereUniqueInput>;
+}
+
+export interface MemeUpdateDataInput {
+  blocked?: Maybe<Boolean>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  memeItems?: Maybe<MemeItemUpdateManyInput>;
+  tags?: Maybe<TagUpdateManyInput>;
+}
+
+export interface MemeItemUpdateManyInput {
+  create?: Maybe<MemeItemCreateInput[] | MemeItemCreateInput>;
+  update?: Maybe<
+    | MemeItemUpdateWithWhereUniqueNestedInput[]
+    | MemeItemUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | MemeItemUpsertWithWhereUniqueNestedInput[]
+    | MemeItemUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<MemeItemWhereUniqueInput[] | MemeItemWhereUniqueInput>;
+  connect?: Maybe<MemeItemWhereUniqueInput[] | MemeItemWhereUniqueInput>;
+  set?: Maybe<MemeItemWhereUniqueInput[] | MemeItemWhereUniqueInput>;
+  disconnect?: Maybe<MemeItemWhereUniqueInput[] | MemeItemWhereUniqueInput>;
+  deleteMany?: Maybe<MemeItemScalarWhereInput[] | MemeItemScalarWhereInput>;
+  updateMany?: Maybe<
+    | MemeItemUpdateManyWithWhereNestedInput[]
+    | MemeItemUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface MemeItemUpdateWithWhereUniqueNestedInput {
+  where: MemeItemWhereUniqueInput;
+  data: MemeItemUpdateDataInput;
+}
+
+export interface MemeItemUpdateDataInput {
+  blocked?: Maybe<Boolean>;
+  type?: Maybe<MemeItemType>;
+  meta?: Maybe<String>;
+  value?: Maybe<String>;
+  style?: Maybe<String>;
+  tags?: Maybe<TagUpdateManyInput>;
+}
+
+export interface TagUpdateManyInput {
+  create?: Maybe<TagCreateInput[] | TagCreateInput>;
+  update?: Maybe<
+    TagUpdateWithWhereUniqueNestedInput[] | TagUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    TagUpsertWithWhereUniqueNestedInput[] | TagUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<TagWhereUniqueInput[] | TagWhereUniqueInput>;
+  connect?: Maybe<TagWhereUniqueInput[] | TagWhereUniqueInput>;
+  set?: Maybe<TagWhereUniqueInput[] | TagWhereUniqueInput>;
+  disconnect?: Maybe<TagWhereUniqueInput[] | TagWhereUniqueInput>;
+  deleteMany?: Maybe<TagScalarWhereInput[] | TagScalarWhereInput>;
+  updateMany?: Maybe<
+    TagUpdateManyWithWhereNestedInput[] | TagUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface TagUpdateWithWhereUniqueNestedInput {
+  where: TagWhereUniqueInput;
+  data: TagUpdateDataInput;
+}
+
+export interface TagUpdateDataInput {
+  blocked?: Maybe<Boolean>;
+  name?: Maybe<String>;
+}
+
+export interface TagUpsertWithWhereUniqueNestedInput {
+  where: TagWhereUniqueInput;
+  update: TagUpdateDataInput;
+  create: TagCreateInput;
+}
+
+export interface TagScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  blocked?: Maybe<Boolean>;
+  blocked_not?: Maybe<Boolean>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  AND?: Maybe<TagScalarWhereInput[] | TagScalarWhereInput>;
+  OR?: Maybe<TagScalarWhereInput[] | TagScalarWhereInput>;
+  NOT?: Maybe<TagScalarWhereInput[] | TagScalarWhereInput>;
+}
+
+export interface TagUpdateManyWithWhereNestedInput {
+  where: TagScalarWhereInput;
+  data: TagUpdateManyDataInput;
+}
+
+export interface TagUpdateManyDataInput {
+  blocked?: Maybe<Boolean>;
+  name?: Maybe<String>;
+}
+
+export interface MemeItemUpsertWithWhereUniqueNestedInput {
+  where: MemeItemWhereUniqueInput;
+  update: MemeItemUpdateDataInput;
+  create: MemeItemCreateInput;
+}
+
+export interface MemeItemScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  blocked?: Maybe<Boolean>;
+  blocked_not?: Maybe<Boolean>;
+  type?: Maybe<MemeItemType>;
+  type_not?: Maybe<MemeItemType>;
+  type_in?: Maybe<MemeItemType[] | MemeItemType>;
+  type_not_in?: Maybe<MemeItemType[] | MemeItemType>;
+  meta?: Maybe<String>;
+  meta_not?: Maybe<String>;
+  meta_in?: Maybe<String[] | String>;
+  meta_not_in?: Maybe<String[] | String>;
+  meta_lt?: Maybe<String>;
+  meta_lte?: Maybe<String>;
+  meta_gt?: Maybe<String>;
+  meta_gte?: Maybe<String>;
+  meta_contains?: Maybe<String>;
+  meta_not_contains?: Maybe<String>;
+  meta_starts_with?: Maybe<String>;
+  meta_not_starts_with?: Maybe<String>;
+  meta_ends_with?: Maybe<String>;
+  meta_not_ends_with?: Maybe<String>;
+  value?: Maybe<String>;
+  value_not?: Maybe<String>;
+  value_in?: Maybe<String[] | String>;
+  value_not_in?: Maybe<String[] | String>;
+  value_lt?: Maybe<String>;
+  value_lte?: Maybe<String>;
+  value_gt?: Maybe<String>;
+  value_gte?: Maybe<String>;
+  value_contains?: Maybe<String>;
+  value_not_contains?: Maybe<String>;
+  value_starts_with?: Maybe<String>;
+  value_not_starts_with?: Maybe<String>;
+  value_ends_with?: Maybe<String>;
+  value_not_ends_with?: Maybe<String>;
+  style?: Maybe<String>;
+  style_not?: Maybe<String>;
+  style_in?: Maybe<String[] | String>;
+  style_not_in?: Maybe<String[] | String>;
+  style_lt?: Maybe<String>;
+  style_lte?: Maybe<String>;
+  style_gt?: Maybe<String>;
+  style_gte?: Maybe<String>;
+  style_contains?: Maybe<String>;
+  style_not_contains?: Maybe<String>;
+  style_starts_with?: Maybe<String>;
+  style_not_starts_with?: Maybe<String>;
+  style_ends_with?: Maybe<String>;
+  style_not_ends_with?: Maybe<String>;
+  AND?: Maybe<MemeItemScalarWhereInput[] | MemeItemScalarWhereInput>;
+  OR?: Maybe<MemeItemScalarWhereInput[] | MemeItemScalarWhereInput>;
+  NOT?: Maybe<MemeItemScalarWhereInput[] | MemeItemScalarWhereInput>;
+}
+
+export interface MemeItemUpdateManyWithWhereNestedInput {
+  where: MemeItemScalarWhereInput;
+  data: MemeItemUpdateManyDataInput;
+}
+
+export interface MemeItemUpdateManyDataInput {
+  blocked?: Maybe<Boolean>;
+  type?: Maybe<MemeItemType>;
+  meta?: Maybe<String>;
+  value?: Maybe<String>;
+  style?: Maybe<String>;
+}
+
+export interface MemeUpsertNestedInput {
+  update: MemeUpdateDataInput;
+  create: MemeCreateInput;
+}
+
+export interface PostUpsertWithWhereUniqueNestedInput {
   where: PostWhereUniqueInput;
-  update: PostUpdateWithoutAuthorDataInput;
-  create: PostCreateWithoutAuthorInput;
+  update: PostUpdateDataInput;
+  create: PostCreateInput;
 }
 
 export interface PostScalarWhereInput {
@@ -453,36 +1221,22 @@ export interface PostScalarWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  published?: Maybe<Boolean>;
-  published_not?: Maybe<Boolean>;
-  title?: Maybe<String>;
-  title_not?: Maybe<String>;
-  title_in?: Maybe<String[] | String>;
-  title_not_in?: Maybe<String[] | String>;
-  title_lt?: Maybe<String>;
-  title_lte?: Maybe<String>;
-  title_gt?: Maybe<String>;
-  title_gte?: Maybe<String>;
-  title_contains?: Maybe<String>;
-  title_not_contains?: Maybe<String>;
-  title_starts_with?: Maybe<String>;
-  title_not_starts_with?: Maybe<String>;
-  title_ends_with?: Maybe<String>;
-  title_not_ends_with?: Maybe<String>;
-  content?: Maybe<String>;
-  content_not?: Maybe<String>;
-  content_in?: Maybe<String[] | String>;
-  content_not_in?: Maybe<String[] | String>;
-  content_lt?: Maybe<String>;
-  content_lte?: Maybe<String>;
-  content_gt?: Maybe<String>;
-  content_gte?: Maybe<String>;
-  content_contains?: Maybe<String>;
-  content_not_contains?: Maybe<String>;
-  content_starts_with?: Maybe<String>;
-  content_not_starts_with?: Maybe<String>;
-  content_ends_with?: Maybe<String>;
-  content_not_ends_with?: Maybe<String>;
+  blocked?: Maybe<Boolean>;
+  blocked_not?: Maybe<Boolean>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
   AND?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
   OR?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
   NOT?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
@@ -494,15 +1248,163 @@ export interface PostUpdateManyWithWhereNestedInput {
 }
 
 export interface PostUpdateManyDataInput {
-  published?: Maybe<Boolean>;
-  title?: Maybe<String>;
-  content?: Maybe<String>;
+  blocked?: Maybe<Boolean>;
+  name?: Maybe<String>;
+}
+
+export interface ThreadUpsertWithWhereUniqueNestedInput {
+  where: ThreadWhereUniqueInput;
+  update: ThreadUpdateDataInput;
+  create: ThreadCreateInput;
+}
+
+export interface ThreadScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  blocked?: Maybe<Boolean>;
+  blocked_not?: Maybe<Boolean>;
+  AND?: Maybe<ThreadScalarWhereInput[] | ThreadScalarWhereInput>;
+  OR?: Maybe<ThreadScalarWhereInput[] | ThreadScalarWhereInput>;
+  NOT?: Maybe<ThreadScalarWhereInput[] | ThreadScalarWhereInput>;
+}
+
+export interface ThreadUpdateManyWithWhereNestedInput {
+  where: ThreadScalarWhereInput;
+  data: ThreadUpdateManyDataInput;
+}
+
+export interface ThreadUpdateManyDataInput {
+  blocked?: Maybe<Boolean>;
+}
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export interface MemeUpdateManyMutationInput {
+  blocked?: Maybe<Boolean>;
+}
+
+export interface MemeItemUpdateInput {
+  blocked?: Maybe<Boolean>;
+  type?: Maybe<MemeItemType>;
+  meta?: Maybe<String>;
+  value?: Maybe<String>;
+  style?: Maybe<String>;
+  tags?: Maybe<TagUpdateManyInput>;
+}
+
+export interface MemeItemUpdateManyMutationInput {
+  blocked?: Maybe<Boolean>;
+  type?: Maybe<MemeItemType>;
+  meta?: Maybe<String>;
+  value?: Maybe<String>;
+  style?: Maybe<String>;
+}
+
+export interface PostUpdateInput {
+  blocked?: Maybe<Boolean>;
+  name?: Maybe<String>;
+  meme?: Maybe<MemeUpdateOneRequiredInput>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  tags?: Maybe<TagUpdateManyInput>;
+}
+
+export interface PostUpdateManyMutationInput {
+  blocked?: Maybe<Boolean>;
+  name?: Maybe<String>;
+}
+
+export interface TagUpdateInput {
+  blocked?: Maybe<Boolean>;
+  name?: Maybe<String>;
+}
+
+export interface TagUpdateManyMutationInput {
+  blocked?: Maybe<Boolean>;
+  name?: Maybe<String>;
+}
+
+export interface ThreadUpdateInput {
+  blocked?: Maybe<Boolean>;
+  posts?: Maybe<PostUpdateManyInput>;
+  tags?: Maybe<TagUpdateManyInput>;
+}
+
+export interface ThreadUpdateManyMutationInput {
+  blocked?: Maybe<Boolean>;
+}
+
+export interface UserUpdateInput {
+  blocked?: Maybe<Boolean>;
+  email?: Maybe<String>;
+  passwordHash?: Maybe<String>;
+  confirmed?: Maybe<Boolean>;
+  permissions?: Maybe<UserUpdatepermissionsInput>;
+  threads?: Maybe<ThreadUpdateManyInput>;
 }
 
 export interface UserUpdateManyMutationInput {
+  blocked?: Maybe<Boolean>;
   email?: Maybe<String>;
-  password?: Maybe<String>;
-  name?: Maybe<String>;
+  passwordHash?: Maybe<String>;
+  confirmed?: Maybe<Boolean>;
+  permissions?: Maybe<UserUpdatepermissionsInput>;
+}
+
+export interface MemeSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<MemeWhereInput>;
+  AND?: Maybe<MemeSubscriptionWhereInput[] | MemeSubscriptionWhereInput>;
+  OR?: Maybe<MemeSubscriptionWhereInput[] | MemeSubscriptionWhereInput>;
+  NOT?: Maybe<MemeSubscriptionWhereInput[] | MemeSubscriptionWhereInput>;
+}
+
+export interface MemeItemSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<MemeItemWhereInput>;
+  AND?: Maybe<
+    MemeItemSubscriptionWhereInput[] | MemeItemSubscriptionWhereInput
+  >;
+  OR?: Maybe<MemeItemSubscriptionWhereInput[] | MemeItemSubscriptionWhereInput>;
+  NOT?: Maybe<
+    MemeItemSubscriptionWhereInput[] | MemeItemSubscriptionWhereInput
+  >;
 }
 
 export interface PostSubscriptionWhereInput {
@@ -514,6 +1416,28 @@ export interface PostSubscriptionWhereInput {
   AND?: Maybe<PostSubscriptionWhereInput[] | PostSubscriptionWhereInput>;
   OR?: Maybe<PostSubscriptionWhereInput[] | PostSubscriptionWhereInput>;
   NOT?: Maybe<PostSubscriptionWhereInput[] | PostSubscriptionWhereInput>;
+}
+
+export interface TagSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<TagWhereInput>;
+  AND?: Maybe<TagSubscriptionWhereInput[] | TagSubscriptionWhereInput>;
+  OR?: Maybe<TagSubscriptionWhereInput[] | TagSubscriptionWhereInput>;
+  NOT?: Maybe<TagSubscriptionWhereInput[] | TagSubscriptionWhereInput>;
+}
+
+export interface ThreadSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ThreadWhereInput>;
+  AND?: Maybe<ThreadSubscriptionWhereInput[] | ThreadSubscriptionWhereInput>;
+  OR?: Maybe<ThreadSubscriptionWhereInput[] | ThreadSubscriptionWhereInput>;
+  NOT?: Maybe<ThreadSubscriptionWhereInput[] | ThreadSubscriptionWhereInput>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -531,64 +1455,118 @@ export interface NodeNode {
   id: ID_Output;
 }
 
-export interface Post {
+export interface Meme {
   id: ID_Output;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
-  published: Boolean;
-  title: String;
-  content: String;
+  blocked: Boolean;
 }
 
-export interface PostPromise extends Promise<Post>, Fragmentable {
+export interface MemePromise extends Promise<Meme>, Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-  published: () => Promise<Boolean>;
-  title: () => Promise<String>;
-  content: () => Promise<String>;
+  blocked: () => Promise<Boolean>;
   author: <T = UserPromise>() => T;
+  memeItems: <T = FragmentableArray<MemeItem>>(args?: {
+    where?: MemeItemWhereInput;
+    orderBy?: MemeItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  tags: <T = FragmentableArray<Tag>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface PostSubscription
-  extends Promise<AsyncIterator<Post>>,
+export interface MemeSubscription
+  extends Promise<AsyncIterator<Meme>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  published: () => Promise<AsyncIterator<Boolean>>;
-  title: () => Promise<AsyncIterator<String>>;
-  content: () => Promise<AsyncIterator<String>>;
+  blocked: () => Promise<AsyncIterator<Boolean>>;
   author: <T = UserSubscription>() => T;
+  memeItems: <T = Promise<AsyncIterator<MemeItemSubscription>>>(args?: {
+    where?: MemeItemWhereInput;
+    orderBy?: MemeItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  tags: <T = Promise<AsyncIterator<TagSubscription>>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface PostNullablePromise
-  extends Promise<Post | null>,
+export interface MemeNullablePromise
+  extends Promise<Meme | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-  published: () => Promise<Boolean>;
-  title: () => Promise<String>;
-  content: () => Promise<String>;
+  blocked: () => Promise<Boolean>;
   author: <T = UserPromise>() => T;
+  memeItems: <T = FragmentableArray<MemeItem>>(args?: {
+    where?: MemeItemWhereInput;
+    orderBy?: MemeItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  tags: <T = FragmentableArray<Tag>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface User {
   id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  blocked: Boolean;
   email: String;
-  password: String;
-  name: String;
+  passwordHash: String;
+  confirmed: Boolean;
+  permissions: PermissionType[];
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
   email: () => Promise<String>;
-  password: () => Promise<String>;
-  name: () => Promise<String>;
-  posts: <T = FragmentableArray<Post>>(args?: {
-    where?: PostWhereInput;
-    orderBy?: PostOrderByInput;
+  passwordHash: () => Promise<String>;
+  confirmed: () => Promise<Boolean>;
+  permissions: () => Promise<PermissionType[]>;
+  threads: <T = FragmentableArray<Thread>>(args?: {
+    where?: ThreadWhereInput;
+    orderBy?: ThreadOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -601,12 +1579,16 @@ export interface UserSubscription
   extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  blocked: () => Promise<AsyncIterator<Boolean>>;
   email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  posts: <T = Promise<AsyncIterator<PostSubscription>>>(args?: {
-    where?: PostWhereInput;
-    orderBy?: PostOrderByInput;
+  passwordHash: () => Promise<AsyncIterator<String>>;
+  confirmed: () => Promise<AsyncIterator<Boolean>>;
+  permissions: () => Promise<AsyncIterator<PermissionType[]>>;
+  threads: <T = Promise<AsyncIterator<ThreadSubscription>>>(args?: {
+    where?: ThreadWhereInput;
+    orderBy?: ThreadOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -619,9 +1601,36 @@ export interface UserNullablePromise
   extends Promise<User | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
   email: () => Promise<String>;
-  password: () => Promise<String>;
-  name: () => Promise<String>;
+  passwordHash: () => Promise<String>;
+  confirmed: () => Promise<Boolean>;
+  permissions: () => Promise<PermissionType[]>;
+  threads: <T = FragmentableArray<Thread>>(args?: {
+    where?: ThreadWhereInput;
+    orderBy?: ThreadOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface Thread {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  blocked: Boolean;
+}
+
+export interface ThreadPromise extends Promise<Thread>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
   posts: <T = FragmentableArray<Post>>(args?: {
     where?: PostWhereInput;
     orderBy?: PostOrderByInput;
@@ -631,27 +1640,268 @@ export interface UserNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
+  tags: <T = FragmentableArray<Tag>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface PostConnection {
+export interface ThreadSubscription
+  extends Promise<AsyncIterator<Thread>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  blocked: () => Promise<AsyncIterator<Boolean>>;
+  posts: <T = Promise<AsyncIterator<PostSubscription>>>(args?: {
+    where?: PostWhereInput;
+    orderBy?: PostOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  tags: <T = Promise<AsyncIterator<TagSubscription>>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface ThreadNullablePromise
+  extends Promise<Thread | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
+  posts: <T = FragmentableArray<Post>>(args?: {
+    where?: PostWhereInput;
+    orderBy?: PostOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  tags: <T = FragmentableArray<Tag>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface Post {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  blocked: Boolean;
+  name: String;
+}
+
+export interface PostPromise extends Promise<Post>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
+  name: () => Promise<String>;
+  meme: <T = MemePromise>() => T;
+  author: <T = UserPromise>() => T;
+  tags: <T = FragmentableArray<Tag>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface PostSubscription
+  extends Promise<AsyncIterator<Post>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  blocked: () => Promise<AsyncIterator<Boolean>>;
+  name: () => Promise<AsyncIterator<String>>;
+  meme: <T = MemeSubscription>() => T;
+  author: <T = UserSubscription>() => T;
+  tags: <T = Promise<AsyncIterator<TagSubscription>>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface PostNullablePromise
+  extends Promise<Post | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
+  name: () => Promise<String>;
+  meme: <T = MemePromise>() => T;
+  author: <T = UserPromise>() => T;
+  tags: <T = FragmentableArray<Tag>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface Tag {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  blocked: Boolean;
+  name: String;
+}
+
+export interface TagPromise extends Promise<Tag>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
+  name: () => Promise<String>;
+}
+
+export interface TagSubscription
+  extends Promise<AsyncIterator<Tag>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  blocked: () => Promise<AsyncIterator<Boolean>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TagNullablePromise extends Promise<Tag | null>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
+  name: () => Promise<String>;
+}
+
+export interface MemeItem {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  blocked: Boolean;
+  type: MemeItemType;
+  meta: String;
+  value: String;
+  style: String;
+}
+
+export interface MemeItemPromise extends Promise<MemeItem>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
+  type: () => Promise<MemeItemType>;
+  meta: () => Promise<String>;
+  value: () => Promise<String>;
+  style: () => Promise<String>;
+  tags: <T = FragmentableArray<Tag>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface MemeItemSubscription
+  extends Promise<AsyncIterator<MemeItem>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  blocked: () => Promise<AsyncIterator<Boolean>>;
+  type: () => Promise<AsyncIterator<MemeItemType>>;
+  meta: () => Promise<AsyncIterator<String>>;
+  value: () => Promise<AsyncIterator<String>>;
+  style: () => Promise<AsyncIterator<String>>;
+  tags: <T = Promise<AsyncIterator<TagSubscription>>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface MemeItemNullablePromise
+  extends Promise<MemeItem | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
+  type: () => Promise<MemeItemType>;
+  meta: () => Promise<String>;
+  value: () => Promise<String>;
+  style: () => Promise<String>;
+  tags: <T = FragmentableArray<Tag>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface MemeConnection {
   pageInfo: PageInfo;
-  edges: PostEdge[];
+  edges: MemeEdge[];
 }
 
-export interface PostConnectionPromise
-  extends Promise<PostConnection>,
+export interface MemeConnectionPromise
+  extends Promise<MemeConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PostEdge>>() => T;
-  aggregate: <T = AggregatePostPromise>() => T;
+  edges: <T = FragmentableArray<MemeEdge>>() => T;
+  aggregate: <T = AggregateMemePromise>() => T;
 }
 
-export interface PostConnectionSubscription
-  extends Promise<AsyncIterator<PostConnection>>,
+export interface MemeConnectionSubscription
+  extends Promise<AsyncIterator<MemeConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PostEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePostSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MemeEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMemeSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -675,6 +1925,116 @@ export interface PageInfoSubscription
   hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
   startCursor: () => Promise<AsyncIterator<String>>;
   endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MemeEdge {
+  node: Meme;
+  cursor: String;
+}
+
+export interface MemeEdgePromise extends Promise<MemeEdge>, Fragmentable {
+  node: <T = MemePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MemeEdgeSubscription
+  extends Promise<AsyncIterator<MemeEdge>>,
+    Fragmentable {
+  node: <T = MemeSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateMeme {
+  count: Int;
+}
+
+export interface AggregateMemePromise
+  extends Promise<AggregateMeme>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateMemeSubscription
+  extends Promise<AsyncIterator<AggregateMeme>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface MemeItemConnection {
+  pageInfo: PageInfo;
+  edges: MemeItemEdge[];
+}
+
+export interface MemeItemConnectionPromise
+  extends Promise<MemeItemConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MemeItemEdge>>() => T;
+  aggregate: <T = AggregateMemeItemPromise>() => T;
+}
+
+export interface MemeItemConnectionSubscription
+  extends Promise<AsyncIterator<MemeItemConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MemeItemEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMemeItemSubscription>() => T;
+}
+
+export interface MemeItemEdge {
+  node: MemeItem;
+  cursor: String;
+}
+
+export interface MemeItemEdgePromise
+  extends Promise<MemeItemEdge>,
+    Fragmentable {
+  node: <T = MemeItemPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MemeItemEdgeSubscription
+  extends Promise<AsyncIterator<MemeItemEdge>>,
+    Fragmentable {
+  node: <T = MemeItemSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateMemeItem {
+  count: Int;
+}
+
+export interface AggregateMemeItemPromise
+  extends Promise<AggregateMemeItem>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateMemeItemSubscription
+  extends Promise<AsyncIterator<AggregateMemeItem>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface PostConnection {
+  pageInfo: PageInfo;
+  edges: PostEdge[];
+}
+
+export interface PostConnectionPromise
+  extends Promise<PostConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PostEdge>>() => T;
+  aggregate: <T = AggregatePostPromise>() => T;
+}
+
+export interface PostConnectionSubscription
+  extends Promise<AsyncIterator<PostConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PostEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePostSubscription>() => T;
 }
 
 export interface PostEdge {
@@ -706,6 +2066,114 @@ export interface AggregatePostPromise
 
 export interface AggregatePostSubscription
   extends Promise<AsyncIterator<AggregatePost>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface TagConnection {
+  pageInfo: PageInfo;
+  edges: TagEdge[];
+}
+
+export interface TagConnectionPromise
+  extends Promise<TagConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TagEdge>>() => T;
+  aggregate: <T = AggregateTagPromise>() => T;
+}
+
+export interface TagConnectionSubscription
+  extends Promise<AsyncIterator<TagConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TagEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTagSubscription>() => T;
+}
+
+export interface TagEdge {
+  node: Tag;
+  cursor: String;
+}
+
+export interface TagEdgePromise extends Promise<TagEdge>, Fragmentable {
+  node: <T = TagPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface TagEdgeSubscription
+  extends Promise<AsyncIterator<TagEdge>>,
+    Fragmentable {
+  node: <T = TagSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateTag {
+  count: Int;
+}
+
+export interface AggregateTagPromise
+  extends Promise<AggregateTag>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTagSubscription
+  extends Promise<AsyncIterator<AggregateTag>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ThreadConnection {
+  pageInfo: PageInfo;
+  edges: ThreadEdge[];
+}
+
+export interface ThreadConnectionPromise
+  extends Promise<ThreadConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ThreadEdge>>() => T;
+  aggregate: <T = AggregateThreadPromise>() => T;
+}
+
+export interface ThreadConnectionSubscription
+  extends Promise<AsyncIterator<ThreadConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ThreadEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateThreadSubscription>() => T;
+}
+
+export interface ThreadEdge {
+  node: Thread;
+  cursor: String;
+}
+
+export interface ThreadEdgePromise extends Promise<ThreadEdge>, Fragmentable {
+  node: <T = ThreadPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ThreadEdgeSubscription
+  extends Promise<AsyncIterator<ThreadEdge>>,
+    Fragmentable {
+  node: <T = ThreadSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateThread {
+  count: Int;
+}
+
+export interface AggregateThreadPromise
+  extends Promise<AggregateThread>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateThreadSubscription
+  extends Promise<AsyncIterator<AggregateThread>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -780,6 +2248,118 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
+export interface MemeSubscriptionPayload {
+  mutation: MutationType;
+  node: Meme;
+  updatedFields: String[];
+  previousValues: MemePreviousValues;
+}
+
+export interface MemeSubscriptionPayloadPromise
+  extends Promise<MemeSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MemePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MemePreviousValuesPromise>() => T;
+}
+
+export interface MemeSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MemeSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MemeSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MemePreviousValuesSubscription>() => T;
+}
+
+export interface MemePreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  blocked: Boolean;
+}
+
+export interface MemePreviousValuesPromise
+  extends Promise<MemePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
+}
+
+export interface MemePreviousValuesSubscription
+  extends Promise<AsyncIterator<MemePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  blocked: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface MemeItemSubscriptionPayload {
+  mutation: MutationType;
+  node: MemeItem;
+  updatedFields: String[];
+  previousValues: MemeItemPreviousValues;
+}
+
+export interface MemeItemSubscriptionPayloadPromise
+  extends Promise<MemeItemSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MemeItemPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MemeItemPreviousValuesPromise>() => T;
+}
+
+export interface MemeItemSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MemeItemSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MemeItemSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MemeItemPreviousValuesSubscription>() => T;
+}
+
+export interface MemeItemPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  blocked: Boolean;
+  type: MemeItemType;
+  meta: String;
+  value: String;
+  style: String;
+}
+
+export interface MemeItemPreviousValuesPromise
+  extends Promise<MemeItemPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
+  type: () => Promise<MemeItemType>;
+  meta: () => Promise<String>;
+  value: () => Promise<String>;
+  style: () => Promise<String>;
+}
+
+export interface MemeItemPreviousValuesSubscription
+  extends Promise<AsyncIterator<MemeItemPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  blocked: () => Promise<AsyncIterator<Boolean>>;
+  type: () => Promise<AsyncIterator<MemeItemType>>;
+  meta: () => Promise<AsyncIterator<String>>;
+  value: () => Promise<AsyncIterator<String>>;
+  style: () => Promise<AsyncIterator<String>>;
+}
+
 export interface PostSubscriptionPayload {
   mutation: MutationType;
   node: Post;
@@ -809,9 +2389,8 @@ export interface PostPreviousValues {
   id: ID_Output;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
-  published: Boolean;
-  title: String;
-  content: String;
+  blocked: Boolean;
+  name: String;
 }
 
 export interface PostPreviousValuesPromise
@@ -820,9 +2399,8 @@ export interface PostPreviousValuesPromise
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-  published: () => Promise<Boolean>;
-  title: () => Promise<String>;
-  content: () => Promise<String>;
+  blocked: () => Promise<Boolean>;
+  name: () => Promise<String>;
 }
 
 export interface PostPreviousValuesSubscription
@@ -831,9 +2409,111 @@ export interface PostPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  published: () => Promise<AsyncIterator<Boolean>>;
-  title: () => Promise<AsyncIterator<String>>;
-  content: () => Promise<AsyncIterator<String>>;
+  blocked: () => Promise<AsyncIterator<Boolean>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TagSubscriptionPayload {
+  mutation: MutationType;
+  node: Tag;
+  updatedFields: String[];
+  previousValues: TagPreviousValues;
+}
+
+export interface TagSubscriptionPayloadPromise
+  extends Promise<TagSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = TagPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = TagPreviousValuesPromise>() => T;
+}
+
+export interface TagSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TagSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = TagSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = TagPreviousValuesSubscription>() => T;
+}
+
+export interface TagPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  blocked: Boolean;
+  name: String;
+}
+
+export interface TagPreviousValuesPromise
+  extends Promise<TagPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
+  name: () => Promise<String>;
+}
+
+export interface TagPreviousValuesSubscription
+  extends Promise<AsyncIterator<TagPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  blocked: () => Promise<AsyncIterator<Boolean>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ThreadSubscriptionPayload {
+  mutation: MutationType;
+  node: Thread;
+  updatedFields: String[];
+  previousValues: ThreadPreviousValues;
+}
+
+export interface ThreadSubscriptionPayloadPromise
+  extends Promise<ThreadSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ThreadPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ThreadPreviousValuesPromise>() => T;
+}
+
+export interface ThreadSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ThreadSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ThreadSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ThreadPreviousValuesSubscription>() => T;
+}
+
+export interface ThreadPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  blocked: Boolean;
+}
+
+export interface ThreadPreviousValuesPromise
+  extends Promise<ThreadPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
+}
+
+export interface ThreadPreviousValuesSubscription
+  extends Promise<AsyncIterator<ThreadPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  blocked: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -863,27 +2543,39 @@ export interface UserSubscriptionPayloadSubscription
 
 export interface UserPreviousValues {
   id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  blocked: Boolean;
   email: String;
-  password: String;
-  name: String;
+  passwordHash: String;
+  confirmed: Boolean;
+  permissions: PermissionType[];
 }
 
 export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  blocked: () => Promise<Boolean>;
   email: () => Promise<String>;
-  password: () => Promise<String>;
-  name: () => Promise<String>;
+  passwordHash: () => Promise<String>;
+  confirmed: () => Promise<Boolean>;
+  permissions: () => Promise<PermissionType[]>;
 }
 
 export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  blocked: () => Promise<AsyncIterator<Boolean>>;
   email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
+  passwordHash: () => Promise<AsyncIterator<String>>;
+  confirmed: () => Promise<AsyncIterator<Boolean>>;
+  permissions: () => Promise<AsyncIterator<PermissionType[]>>;
 }
 
 /*
@@ -913,7 +2605,7 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
 
@@ -925,11 +2617,35 @@ export type Long = string;
 
 export const models: Model[] = [
   {
+    name: "User",
+    embedded: false
+  },
+  {
+    name: "PermissionType",
+    embedded: false
+  },
+  {
+    name: "Thread",
+    embedded: false
+  },
+  {
     name: "Post",
     embedded: false
   },
   {
-    name: "User",
+    name: "Meme",
+    embedded: false
+  },
+  {
+    name: "MemeItem",
+    embedded: false
+  },
+  {
+    name: "MemeItemType",
+    embedded: false
+  },
+  {
+    name: "Tag",
     embedded: false
   }
 ];

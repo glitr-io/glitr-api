@@ -1,17 +1,72 @@
-type Post {
-  id: ID! @id
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-  published: Boolean! @default(value: false)
-  title: String!
-  content: String!
-  author: User!
+type User {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean! @default(value: "false")
+  email: String! @unique
+  passwordHash: String!
+  confirmed: Boolean! @default(value: "false")
+  permissions: [PermissionType]
+  threads: [Thread]
 }
 
-type User {
-  id: ID! @id
-  email: String! @unique
-  password: String!
+enum PermissionType {
+  USER
+  ADMIN
+}
+
+type Thread {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean! @default(value: "false")
+  posts: [Post]
+  tags: [Tag]
+}
+
+type Post {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean! @default(value: "false")
   name: String!
-  posts: [Post!]!
+  meme: Meme!
+  author: User!
+  tags: [Tag]
+}
+
+type Meme {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean! @default(value: "false")
+  author: User!
+  memeItems: [MemeItem]!
+  tags: [Tag]
+}
+
+type MemeItem {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean! @default(value: "false")
+  type: MemeItemType!
+  meta: String!
+  value: String!
+  style: String!
+  tags: [Tag]
+}
+
+enum MemeItemType {
+  CANVAS,
+  IMAGE,
+  TEXT
+}
+
+type Tag {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean! @default(value: "false")
+  name: String!
 }

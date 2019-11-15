@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "glitr-api": {
+      "schemaPath": "schema.graphql"
+    }
+  }
+}

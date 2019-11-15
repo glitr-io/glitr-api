@@ -20,7 +20,7 @@ export const auth = {
 		  	throw new Error(`No such user found for email: ${email}`)
 		}
 	
-		const valid = await bcrypt.compare(password, user.password)
+		const valid = await bcrypt.compare(password, user.passwordHash)
 		if (!valid) {
 		 	 throw new Error('Invalid password')
 		}
