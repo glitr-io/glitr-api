@@ -17,37 +17,39 @@ type Mutation {
     passwordHash: String!
     confirmed: Boolean!
     permissions: [PermissionType]
-    threads: [Thread]
+    threads: [ThreadInput]
   ): User!
 
   meme(
-    id: ID! @unique
+    id: ID!
     blocked: Boolean!
-    author: User!
-    memeItems: [MemeItem]!
-    tags: [Tag]
+    author: UserInput!
+    memeItems: [MemeItemInput]!
+    tags: [TagInput]
   ): Meme!
 
   thread(
     id: ID!
     blocked: Boolean!
-    posts: [Post]
-    tags: [Tag]
+    posts: [PostInput]
+    tags: [TagInput]
   ): Thread!
 
   post (
-    id: ID! @unique
+    id: ID!
     blocked: Boolean!
     name: String!
-    meme: Meme!
-    author: User!
-    tags: [Tag]
+    meme: MemeInput!
+    author: UserInput!
+    tags: [TagInput]
   ): Post!
 }
 
 # type Subscription {
 #   feedSubscription: Post
 # }
+
+scalar DateTime
 
 type AuthPayload {
   token: String!
@@ -56,8 +58,21 @@ type AuthPayload {
 
 # ============================
 
+input UserInput {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean!
+  email: String!
+  displayName: String!
+  passwordHash: String!
+  confirmed: Boolean!
+  permissions: [PermissionType]
+  threads: [ThreadInput]
+}
+
 type User {
-  id: ID! @unique
+  id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   blocked: Boolean!
@@ -78,8 +93,11 @@ enum PermissionType {
 
 input ThreadInput {
   id: ID!
-  title: String!
-  posts: [PostInput!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean!
+  posts: [PostInput]
+  tags: [TagInput]
 }
 
 type Thread {
@@ -95,13 +113,17 @@ type Thread {
 
 input PostInput {
   id: ID!
-  title: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean!
+  name: String!
   meme: MemeInput!
-  thread: ThreadInput!
+  author: UserInput!
+  tags: [TagInput]
 }
 
 type Post {
-  id: ID! @unique
+  id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   blocked: Boolean!
@@ -121,7 +143,7 @@ input MemeInput {
 }
 
 type Meme {
-  id: ID! @unique
+  id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   blocked: Boolean!
@@ -134,12 +156,18 @@ type Meme {
 
 input MemeItemInput {
   id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean!
+  type: MemeItemType!
+  meta: String!
   value: String!
-  config: String
+  style: String!
+  tags: [TagInput]
 }
 
 type MemeItem {
-  id: ID! @unique
+  id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   blocked: Boolean!
@@ -154,4 +182,22 @@ enum MemeItemType {
   CANVAS,
   IMAGE,
   TEXT
+}
+
+# ============================
+
+input TagInput {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean!
+  name: String!
+}
+
+type Tag {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  blocked: Boolean!
+  name: String!
 }

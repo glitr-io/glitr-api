@@ -373,6 +373,8 @@ export type UserOrderByInput =
   | "blocked_DESC"
   | "email_ASC"
   | "email_DESC"
+  | "displayName_ASC"
+  | "displayName_DESC"
   | "passwordHash_ASC"
   | "passwordHash_DESC"
   | "confirmed_ASC"
@@ -577,6 +579,20 @@ export interface UserWhereInput {
   email_not_starts_with?: Maybe<String>;
   email_ends_with?: Maybe<String>;
   email_not_ends_with?: Maybe<String>;
+  displayName?: Maybe<String>;
+  displayName_not?: Maybe<String>;
+  displayName_in?: Maybe<String[] | String>;
+  displayName_not_in?: Maybe<String[] | String>;
+  displayName_lt?: Maybe<String>;
+  displayName_lte?: Maybe<String>;
+  displayName_gt?: Maybe<String>;
+  displayName_gte?: Maybe<String>;
+  displayName_contains?: Maybe<String>;
+  displayName_not_contains?: Maybe<String>;
+  displayName_starts_with?: Maybe<String>;
+  displayName_not_starts_with?: Maybe<String>;
+  displayName_ends_with?: Maybe<String>;
+  displayName_not_ends_with?: Maybe<String>;
   passwordHash?: Maybe<String>;
   passwordHash_not?: Maybe<String>;
   passwordHash_in?: Maybe<String[] | String>;
@@ -776,6 +792,7 @@ export interface UserCreateOneInput {
 export interface UserCreateInput {
   blocked?: Maybe<Boolean>;
   email: String;
+  displayName: String;
   passwordHash: String;
   confirmed?: Maybe<Boolean>;
   permissions?: Maybe<UserCreatepermissionsInput>;
@@ -856,6 +873,7 @@ export interface UserUpdateOneRequiredInput {
 export interface UserUpdateDataInput {
   blocked?: Maybe<Boolean>;
   email?: Maybe<String>;
+  displayName?: Maybe<String>;
   passwordHash?: Maybe<String>;
   confirmed?: Maybe<Boolean>;
   permissions?: Maybe<UserUpdatepermissionsInput>;
@@ -1367,6 +1385,7 @@ export interface ThreadUpdateManyMutationInput {
 export interface UserUpdateInput {
   blocked?: Maybe<Boolean>;
   email?: Maybe<String>;
+  displayName?: Maybe<String>;
   passwordHash?: Maybe<String>;
   confirmed?: Maybe<Boolean>;
   permissions?: Maybe<UserUpdatepermissionsInput>;
@@ -1376,6 +1395,7 @@ export interface UserUpdateInput {
 export interface UserUpdateManyMutationInput {
   blocked?: Maybe<Boolean>;
   email?: Maybe<String>;
+  displayName?: Maybe<String>;
   passwordHash?: Maybe<String>;
   confirmed?: Maybe<Boolean>;
   permissions?: Maybe<UserUpdatepermissionsInput>;
@@ -1550,6 +1570,7 @@ export interface User {
   updatedAt: DateTimeOutput;
   blocked: Boolean;
   email: String;
+  displayName: String;
   passwordHash: String;
   confirmed: Boolean;
   permissions: PermissionType[];
@@ -1561,6 +1582,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   updatedAt: () => Promise<DateTimeOutput>;
   blocked: () => Promise<Boolean>;
   email: () => Promise<String>;
+  displayName: () => Promise<String>;
   passwordHash: () => Promise<String>;
   confirmed: () => Promise<Boolean>;
   permissions: () => Promise<PermissionType[]>;
@@ -1583,6 +1605,7 @@ export interface UserSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   blocked: () => Promise<AsyncIterator<Boolean>>;
   email: () => Promise<AsyncIterator<String>>;
+  displayName: () => Promise<AsyncIterator<String>>;
   passwordHash: () => Promise<AsyncIterator<String>>;
   confirmed: () => Promise<AsyncIterator<Boolean>>;
   permissions: () => Promise<AsyncIterator<PermissionType[]>>;
@@ -1605,6 +1628,7 @@ export interface UserNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
   blocked: () => Promise<Boolean>;
   email: () => Promise<String>;
+  displayName: () => Promise<String>;
   passwordHash: () => Promise<String>;
   confirmed: () => Promise<Boolean>;
   permissions: () => Promise<PermissionType[]>;
@@ -2547,6 +2571,7 @@ export interface UserPreviousValues {
   updatedAt: DateTimeOutput;
   blocked: Boolean;
   email: String;
+  displayName: String;
   passwordHash: String;
   confirmed: Boolean;
   permissions: PermissionType[];
@@ -2560,6 +2585,7 @@ export interface UserPreviousValuesPromise
   updatedAt: () => Promise<DateTimeOutput>;
   blocked: () => Promise<Boolean>;
   email: () => Promise<String>;
+  displayName: () => Promise<String>;
   passwordHash: () => Promise<String>;
   confirmed: () => Promise<Boolean>;
   permissions: () => Promise<PermissionType[]>;
@@ -2573,6 +2599,7 @@ export interface UserPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   blocked: () => Promise<AsyncIterator<Boolean>>;
   email: () => Promise<AsyncIterator<String>>;
+  displayName: () => Promise<AsyncIterator<String>>;
   passwordHash: () => Promise<AsyncIterator<String>>;
   confirmed: () => Promise<AsyncIterator<Boolean>>;
   permissions: () => Promise<AsyncIterator<PermissionType[]>>;

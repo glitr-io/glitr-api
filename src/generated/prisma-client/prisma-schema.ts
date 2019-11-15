@@ -1274,6 +1274,7 @@ type User {
   updatedAt: DateTime!
   blocked: Boolean!
   email: String!
+  displayName: String!
   passwordHash: String!
   confirmed: Boolean!
   permissions: [PermissionType!]!
@@ -1289,6 +1290,7 @@ type UserConnection {
 input UserCreateInput {
   blocked: Boolean
   email: String!
+  displayName: String!
   passwordHash: String!
   confirmed: Boolean
   permissions: UserCreatepermissionsInput
@@ -1320,6 +1322,8 @@ enum UserOrderByInput {
   blocked_DESC
   email_ASC
   email_DESC
+  displayName_ASC
+  displayName_DESC
   passwordHash_ASC
   passwordHash_DESC
   confirmed_ASC
@@ -1332,6 +1336,7 @@ type UserPreviousValues {
   updatedAt: DateTime!
   blocked: Boolean!
   email: String!
+  displayName: String!
   passwordHash: String!
   confirmed: Boolean!
   permissions: [PermissionType!]!
@@ -1358,6 +1363,7 @@ input UserSubscriptionWhereInput {
 input UserUpdateDataInput {
   blocked: Boolean
   email: String
+  displayName: String
   passwordHash: String
   confirmed: Boolean
   permissions: UserUpdatepermissionsInput
@@ -1367,6 +1373,7 @@ input UserUpdateDataInput {
 input UserUpdateInput {
   blocked: Boolean
   email: String
+  displayName: String
   passwordHash: String
   confirmed: Boolean
   permissions: UserUpdatepermissionsInput
@@ -1376,6 +1383,7 @@ input UserUpdateInput {
 input UserUpdateManyMutationInput {
   blocked: Boolean
   email: String
+  displayName: String
   passwordHash: String
   confirmed: Boolean
   permissions: UserUpdatepermissionsInput
@@ -1444,6 +1452,20 @@ input UserWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
+  displayName: String
+  displayName_not: String
+  displayName_in: [String!]
+  displayName_not_in: [String!]
+  displayName_lt: String
+  displayName_lte: String
+  displayName_gt: String
+  displayName_gte: String
+  displayName_contains: String
+  displayName_not_contains: String
+  displayName_starts_with: String
+  displayName_not_starts_with: String
+  displayName_ends_with: String
+  displayName_not_ends_with: String
   passwordHash: String
   passwordHash_not: String
   passwordHash_in: [String!]
