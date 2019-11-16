@@ -51,6 +51,7 @@ type MemeConnection {
 }
 
 input MemeCreateInput {
+  id: ID
   blocked: Boolean
   author: UserCreateOneInput!
   memeItems: MemeItemCreateManyInput
@@ -86,6 +87,7 @@ type MemeItemConnection {
 }
 
 input MemeItemCreateInput {
+  id: ID
   blocked: Boolean
   type: MemeItemType!
   meta: String!
@@ -589,6 +591,7 @@ type PostConnection {
 }
 
 input PostCreateInput {
+  id: ID
   blocked: Boolean
   name: String!
   meme: MemeCreateOneInput!
@@ -858,6 +861,7 @@ type TagConnection {
 }
 
 input TagCreateInput {
+  id: ID
   blocked: Boolean
   name: String!
 }
@@ -1083,6 +1087,7 @@ type ThreadConnection {
 }
 
 input ThreadCreateInput {
+  id: ID
   blocked: Boolean
   posts: PostCreateManyInput
   tags: TagCreateManyInput
@@ -1288,6 +1293,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   blocked: Boolean
   email: String!
   displayName: String!

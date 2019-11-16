@@ -4,9 +4,9 @@ import { Context } from '../../utils'
 
 export const auth = {
 
-	async signup(parent, args, ctx: Context) {
-		const password = await bcrypt.hash(args.password, 10)
-		const user = await ctx.prisma.createUser({ ...args, password })
+	async signup(parent, { password, email, displayName }, ctx: Context) {
+		const passwordHash = await bcrypt.hash(password, 10)
+		const user = await ctx.prisma.createUser({ email, displayName, passwordHash })
 	
 		return {
 			token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),

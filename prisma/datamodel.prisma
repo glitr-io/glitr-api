@@ -1,14 +1,14 @@
 type User {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  blocked: Boolean! @default(value: "false")
+  id: ID! @id @unique
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  blocked: Boolean! @default(value: false)
   email: String! @unique
   displayName: String!
   passwordHash: String!
-  confirmed: Boolean! @default(value: "false")
-  permissions: [PermissionType]
-  threads: [Thread]
+  confirmed: Boolean! @default(value: false)
+  permissions: [PermissionType] @scalarList(strategy: RELATION)
+  threads: [Thread] @scalarList(strategy: RELATION)
 }
 
 enum PermissionType {
@@ -17,45 +17,45 @@ enum PermissionType {
 }
 
 type Thread {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  blocked: Boolean! @default(value: "false")
-  posts: [Post]
-  tags: [Tag]
+  id: ID! @id @unique
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  blocked: Boolean! @default(value: false)
+  posts: [Post] @scalarList(strategy: RELATION)
+  tags: [Tag] @scalarList(strategy: RELATION)
 }
 
 type Post {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  blocked: Boolean! @default(value: "false")
+  id: ID! @id @unique
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  blocked: Boolean! @default(value: false)
   name: String!
   meme: Meme!
   author: User!
-  tags: [Tag]
+  tags: [Tag] @scalarList(strategy: RELATION)
 }
 
 type Meme {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  blocked: Boolean! @default(value: "false")
+  id: ID! @id @unique
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  blocked: Boolean! @default(value: false)
   author: User!
-  memeItems: [MemeItem]!
-  tags: [Tag]
+  memeItems: [MemeItem]! @scalarList(strategy: RELATION)
+  tags: [Tag] @scalarList(strategy: RELATION)
 }
 
 type MemeItem {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  blocked: Boolean! @default(value: "false")
+  id: ID! @id @unique
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  blocked: Boolean! @default(value: false)
   type: MemeItemType!
   meta: String!
   value: String!
   style: String!
-  tags: [Tag]
+  tags: [Tag] @scalarList(strategy: RELATION)
 }
 
 enum MemeItemType {
@@ -65,9 +65,9 @@ enum MemeItemType {
 }
 
 type Tag {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  blocked: Boolean! @default(value: "false")
+  id: ID! @id @unique
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  blocked: Boolean! @default(value: false)
   name: String!
 }

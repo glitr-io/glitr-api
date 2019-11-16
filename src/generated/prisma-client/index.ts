@@ -778,6 +778,7 @@ export type UserWhereUniqueInput = AtLeastOne<{
 }>;
 
 export interface MemeCreateInput {
+  id?: Maybe<ID_Input>;
   blocked?: Maybe<Boolean>;
   author: UserCreateOneInput;
   memeItems?: Maybe<MemeItemCreateManyInput>;
@@ -790,6 +791,7 @@ export interface UserCreateOneInput {
 }
 
 export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
   blocked?: Maybe<Boolean>;
   email: String;
   displayName: String;
@@ -809,6 +811,7 @@ export interface ThreadCreateManyInput {
 }
 
 export interface ThreadCreateInput {
+  id?: Maybe<ID_Input>;
   blocked?: Maybe<Boolean>;
   posts?: Maybe<PostCreateManyInput>;
   tags?: Maybe<TagCreateManyInput>;
@@ -820,6 +823,7 @@ export interface PostCreateManyInput {
 }
 
 export interface PostCreateInput {
+  id?: Maybe<ID_Input>;
   blocked?: Maybe<Boolean>;
   name: String;
   meme: MemeCreateOneInput;
@@ -838,6 +842,7 @@ export interface TagCreateManyInput {
 }
 
 export interface TagCreateInput {
+  id?: Maybe<ID_Input>;
   blocked?: Maybe<Boolean>;
   name: String;
 }
@@ -848,6 +853,7 @@ export interface MemeItemCreateManyInput {
 }
 
 export interface MemeItemCreateInput {
+  id?: Maybe<ID_Input>;
   blocked?: Maybe<Boolean>;
   type: MemeItemType;
   meta: String;
