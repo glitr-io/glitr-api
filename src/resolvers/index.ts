@@ -12,6 +12,6 @@ export default {
     ...post,
   },
   // Subscription,
-  User,
-  Post,
+  // User,
+  // Post,
 }
