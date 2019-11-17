@@ -14,6 +14,9 @@ export const meme = {
             // return ctx.prisma.createMeme({
 
             // })
+
+            // todo: functionality to create meme
+            // todo: functionality to edit meme
         }
     }
 }

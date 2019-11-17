@@ -40,4 +40,7 @@ export const post = {
 
   //   return ctx.prisma.deletePost({ id })
   // },
+
+  // todo: functionality to create post
+  // todo: functionality to edit post post
 }

@@ -30,4 +30,14 @@ export const auth = {
 			user,
 		}
 	},
+
+	async user(parent, { email, password }, ctx: Context) {
+		const userId = getUserId(ctx)
+		const user = await ctx.prisma.user({ id: userId })
+		if (!user) {
+		  	throw new Error(`No such user found for email: ${email}`)
+		}
+
+		// todo: functionality to update user from id
+	},
 }
