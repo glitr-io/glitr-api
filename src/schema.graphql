@@ -29,9 +29,8 @@ type Mutation {
   ): User!
 
   meme(
-    id: ID!
-    blocked: Boolean!
-    author: UserInput!
+    id: ID
+    blocked: Boolean
     memeItems: [MemeItemInput]!
     tags: [TagInput]
   ): Meme!
@@ -144,7 +143,7 @@ type Post {
 # ============================
 
 input MemeInput {
-  id: ID!
+  id: ID
   title: String!
   thumbnail: String!
   memeItems: [MemeItemInput!]!
@@ -163,10 +162,8 @@ type Meme {
 # ============================
 
 input MemeItemInput {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  blocked: Boolean!
+  id: ID
+  blocked: Boolean
   type: MemeItemType!
   meta: String!
   value: String!
@@ -195,10 +192,8 @@ enum MemeItemType {
 # ============================
 
 input TagInput {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  blocked: Boolean!
+  id: ID
+  blocked: Boolean
   name: String!
 }
 

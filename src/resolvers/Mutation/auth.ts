@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken'
-import { Context } from '../../utils'
+import { Context, getUserId } from '../../utils'
 
 export const auth = {
 

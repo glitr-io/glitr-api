@@ -26,4 +26,9 @@ export const Query = {
     const id = getUserId(ctx)
     return ctx.prisma.user({ id })
   },
+
+  meme(parent, { id }, ctx: Context) {
+    const userId = getUserId(ctx)
+    return ctx.prisma.meme({ id })
+  },
 }
