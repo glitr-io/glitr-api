@@ -7,7 +7,7 @@ export const post = {
   //     title,
   //     content,
   //     author: {
-  //       connect: { id: userId },
+  //       connect: { id: userIoiu4321` Zd },
   //     },
   //   })
   // },

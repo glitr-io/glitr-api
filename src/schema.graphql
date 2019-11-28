@@ -147,6 +147,7 @@ input MemeInput {
   title: String!
   thumbnail: String!
   memeItems: [MemeItemInput!]!
+  author: UserInput!
 }
 
 type Meme {
@@ -154,8 +155,8 @@ type Meme {
   createdAt: DateTime!
   updatedAt: DateTime!
   blocked: Boolean!
-  author: User!
-  memeItems: [MemeItem]!
+  author: User
+  memeItems: [MemeItem]
   tags: [Tag]
 }
 
