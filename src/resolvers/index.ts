@@ -6,6 +6,7 @@ import { post } from './Mutation/post'
 import { meme } from './Mutation/meme'
 import { User } from './User'
 import { Post } from './Post'
+import { Meme } from './Meme'
 
 // todo create missing files here create crate and edit functionality
 
@@ -17,6 +18,7 @@ export default {
     ...post,
     ...meme,
   },
+  Meme
   // Subscription,
   // User,
   // Post,

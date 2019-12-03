@@ -8,7 +8,7 @@ export const meme = {
         memeItems,
         tags = []
     }, ctx: Context, info) {
-        const userId = getUserId(ctx)
+        const userId = await getUserId(ctx)
         // const test = await ctx.prisma.$exists.
 
         if (!userId) {
@@ -33,6 +33,7 @@ export const meme = {
         } else {
             // if meme does not exist, create a new meme.
             console.log('creating meme', memeItems);
+            console.log('userid', userId)
             const newMeme = await ctx.prisma.createMeme({
                 author:  {
                     connect: { id: userId },
