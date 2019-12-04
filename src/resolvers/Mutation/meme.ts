@@ -5,7 +5,7 @@ export const meme = {
     
     async meme(parent, {
         id,
-        memeItems,
+        memeItems = [],
         tags = []
     }, ctx: Context, info) {
         const userId = await getUserId(ctx)
@@ -21,15 +21,39 @@ export const meme = {
             })
     
             if (!!memeExists) {
-                // return ctx.prisma.createMeme({
-    
+                return ctx.prisma.updateMeme({
+                    where: { id },
+                    data: {
+                        memeItems: memeItems.map(({ id, ...memeItemProps }) => ({
+                            update: {
+                                where: { id },
+                                data: { ...memeItemProps }
+                            }
+                        })),
+                        tags: tags.map(({ id, ...tagProps }) => ({
+                            update: {
+                                where: { id },
+                                data: { ...tagProps }
+                            }
+                        }))
+                    }
+                });
+            }
+                        // tags: {
+                        //     create: tags.map(({ name = '' }) => (
+                        //         {
+                        //             name
+                        //         }
+                        //     ))
+                        // }
+                    // }
                 // })
     
                 // todo: functionality to create meme
                 // todo: functionality to edit meme
-            } else {
-                // todo: do stuff here
-            }
+            // } else {
+            //     // todo: do stuff here
+            // }
         } else {
             // if meme does not exist, create a new meme.
             console.log('creating meme', memeItems);
