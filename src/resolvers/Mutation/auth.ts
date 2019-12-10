@@ -31,12 +31,46 @@ export const auth = {
 		}
 	},
 
-	async user(parent, { email, password }, ctx: Context) {
+	async user(parent, {
+		email = '',
+		blocked = undefined,
+		displayName = '',
+		confirmed = undefined,
+		permissions = [],
+		threads = []
+	}, ctx: Context) {
 		const userId = getUserId(ctx)
-		const user = await ctx.prisma.user({ id: userId })
-		if (!user) {
+		if (!userId) {
+            throw new Error(`not authorised!!`)
+		}
+		
+		const userExisits = await ctx.prisma.$exists.user({ id: userId })
+		if (!userExisits) {
 		  	throw new Error(`No such user found for email: ${email}`)
 		}
+
+		return await ctx.prisma.updateUser({
+			where: { id: userId },
+			data: {
+				blocked: (typeof blocked === 'boolean' ? !!blocked : undefined),
+				confirmed: (typeof blocked === 'boolean' ? !!confirmed : undefined),
+				displayName,
+				permissions: {
+					set: permissions
+				},
+				threads: {
+					update: threads
+						.filter(({ id }) => !!id)
+						.map(({ id, ...threadProps }) => ({
+							where: { id },
+							data: { ...threadProps }
+						})),
+					create: threads
+						.filter(({ id }) => !id)
+						.map(thread => ({ ...thread }))
+				}
+			}
+		})
 
 		// todo: functionality to update user from id
 	},

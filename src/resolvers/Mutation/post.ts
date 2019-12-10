@@ -1,46 +1,70 @@
-import { getUserId, Context } from '../../utils'
+
+import {  getUserId, Context } from '../../utils'
 
 export const post = {
-  // async createDraft(parent, { title, content }, ctx: Context, info) {
-  //   const userId = getUserId(ctx)
-  //   return ctx.prisma.createPost({
-  //     title,
-  //     content,
-  //     author: {
-  //       connect: { id: userIoiu4321` Zd },
-  //     },
-  //   })
-  // },
+    
+    async post(parent, {
+        id,
+        name = '',
+        meme = { id: null },
+        tags = [],
+        blocked = undefined
+    }, ctx: Context, info) {
+        const userId = await getUserId(ctx)
 
-  // async publish(parent, { id }, ctx: Context, info) {
-  //   const userId = getUserId(ctx)
-  //   const postExists = await ctx.prisma.$exists.post({
-  //     id,
-  //     author: { id: userId },
-  //   })
-  //   if (!postExists) {
-  //     throw new Error(`Post not found or you're not the author`)
-  //   }
+        if (!userId) {
+            throw new Error(`not authorised!!`)
+        }
 
-  //   return ctx.prisma.updatePost({
-  //     where: { id },
-  //     data: { published: true },
-  //   })
-  // },
+        const {
+          id: memeId,
+          ...memeData
+        } = meme
 
-  // async deletePost(parent, { id }, ctx: Context, info) {
-  //   const userId = getUserId(ctx)
-  //   const postExists = await ctx.prisma.$exists.post({
-  //     id,
-  //     author: { id: userId },
-  //   })
-  //   if (!postExists) {
-  //     throw new Error(`Post not found or you're not the author`)
-  //   }
-
-  //   return ctx.prisma.deletePost({ id })
-  // },
-
-  // todo: functionality to create post
-  // todo: functionality to edit post post
+        if (!!id) {
+            const postExists = await ctx.prisma.$exists.post({
+                id,
+            })
+    
+            if (!!postExists) {
+                return ctx.prisma.updatePost({
+                    where: { id },
+                    data: {
+                        blocked: (typeof blocked === 'boolean' ? !!blocked : undefined),
+                        name,
+                        meme: {
+                          update: {
+                            ...memeData
+                          }
+                        },
+                        tags: {
+                            update: tags.map(({ id, ...tagProps }) => ({
+                                where: { id },
+                                data: { ...tagProps }
+                            }))
+                        }
+                        
+                    }
+                })
+            } else {
+                throw new Error(`post with that id not found`)
+            }
+        } else {
+            console.log('creating post')
+            return await ctx.prisma.createPost({
+                author:  {
+                    connect: { id: userId },
+                },
+                name,
+                meme: memeData,
+                tags: {
+                    create: tags.map(({ name = '' }) => (
+                        {
+                            name
+                        }
+                    ))
+                }
+            });
+        }
+    }
 }

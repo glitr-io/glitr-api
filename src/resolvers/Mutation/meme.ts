@@ -1,15 +1,16 @@
 
 import {  getUserId, Context } from '../../utils'
+import { create } from 'domain'
 
 export const meme = {
     
     async meme(parent, {
         id,
         memeItems = [],
-        tags = []
+        tags = [],
+        blocked = undefined
     }, ctx: Context, info) {
         const userId = await getUserId(ctx)
-        // const test = await ctx.prisma.$exists.
 
         if (!userId) {
             throw new Error(`not authorised!!`)
@@ -21,44 +22,36 @@ export const meme = {
             })
     
             if (!!memeExists) {
-                return ctx.prisma.updateMeme({
+                return await ctx.prisma.updateMeme({
                     where: { id },
                     data: {
-                        memeItems: memeItems.map(({ id, ...memeItemProps }) => ({
-                            update: {
-                                where: { id },
-                                data: { ...memeItemProps }
-                            }
-                        })),
-                        tags: tags.map(({ id, ...tagProps }) => ({
-                            update: {
+                        blocked: (typeof blocked === 'boolean' ? !!blocked : undefined),
+                        memeItems: {
+                            update: memeItems
+                                .filter(({ id }) => !!id)
+                                .map(({ id, ...memeItemProps }) => ({
+                                    where: { id },
+                                    data: { ...memeItemProps }
+                                })),
+                            create: memeItems
+                                .filter(({ id }) => !id)
+                                .map(meme => ({ ...meme }))
+                        },
+                        tags: {
+                            update: tags.map(({ id, ...tagProps }) => ({
                                 where: { id },
                                 data: { ...tagProps }
-                            }
-                        }))
+                            }))
+                        }
+                        
                     }
-                });
+                })
+            } else {
+                throw new Error(`meme with that id not found`)
             }
-                        // tags: {
-                        //     create: tags.map(({ name = '' }) => (
-                        //         {
-                        //             name
-                        //         }
-                        //     ))
-                        // }
-                    // }
-                // })
-    
-                // todo: functionality to create meme
-                // todo: functionality to edit meme
-            // } else {
-            //     // todo: do stuff here
-            // }
         } else {
-            // if meme does not exist, create a new meme.
-            console.log('creating meme', memeItems);
-            console.log('userid', userId)
-            const newMeme = await ctx.prisma.createMeme({
+            console.log('creating meme')
+            return await ctx.prisma.createMeme({
                 author:  {
                     connect: { id: userId },
                 },
@@ -91,13 +84,6 @@ export const meme = {
                     ))
                 }
             });
-
-            console.log('newMeme', newMeme);
-
-            const test1 = await ctx.prisma.meme({ id: newMeme.id });
-
-            console.log('test1', test1)
-            return test1;
         }
     }
 }

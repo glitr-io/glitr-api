@@ -1,3 +1,5 @@
+scalar DateTime
+
 type Query {
   me: User
   thread(id: ID!): Thread
@@ -20,10 +22,9 @@ type Mutation {
   user(
     id: ID!
     blocked: Boolean!
-    email: String!
-    displayName: String!
-    passwordHash: String!
-    confirmed: Boolean!
+    email: String
+    displayName: String
+    confirmed: Boolean
     permissions: [PermissionType]
     threads: [ThreadInput]
   ): User!
@@ -31,7 +32,7 @@ type Mutation {
   meme(
     id: ID
     blocked: Boolean
-    memeItems: [MemeItemInput]!
+    memeItems: [MemeItemInput]
     tags: [TagInput]
   ): Meme!
 
@@ -43,7 +44,7 @@ type Mutation {
   ): Thread!
 
   post (
-    id: ID!
+    id: ID
     blocked: Boolean!
     name: String!
     meme: MemeInput!
@@ -55,8 +56,6 @@ type Mutation {
 # type Subscription {
 #   feedSubscription: Post
 # }
-
-scalar DateTime
 
 type AuthPayload {
   token: String!
@@ -165,10 +164,10 @@ type Meme {
 input MemeItemInput {
   id: ID
   blocked: Boolean
-  type: MemeItemType!
-  meta: String!
-  value: String!
-  style: String!
+  type: MemeItemType
+  meta: String
+  value: String
+  style: String
   tags: [TagInput]
 }
 
